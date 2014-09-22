@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.weixin.bean">
+
+    <class name="com.weixin.bean.WxUser" table="wx_user" schema="" catalog="wx_admin">
+        <id name="id" column="id"/>
+        <property name="wxId" column="wx_id"/>
+        <property name="wxName" column="wx_name"/>
+        <property name="wxLevel" column="wx_level"/>
+        <property name="wxCompany" column="wx_company"/>
+        <property name="wxPhone" column="wx_phone"/>
+    </class>
+</hibernate-mapping>
