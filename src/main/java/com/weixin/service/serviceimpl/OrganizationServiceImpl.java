@@ -1,4 +1,4 @@
-package com.weixin.serviceimpl;
+package com.weixin.service.serviceimpl;
 
 import com.weixin.service.OrganizationSerVice;
 import org.hibernate.HibernateException;
