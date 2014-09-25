@@ -2,14 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.weixin.bean">
+<hibernate-mapping>
 
     <class name="com.weixin.bean.WxUser" table="wx_user" schema="" catalog="wx_admin">
         <id name="id" column="id"/>
-        <property name="wxId" column="wx_id"/>
-        <property name="wxName" column="wx_name"/>
-        <property name="wxLevel" column="wx_level"/>
-        <property name="wxCompany" column="wx_company"/>
-        <property name="wxPhone" column="wx_phone"/>
+        <property name="name" column="name"/>
+        <property name="departmentId" column="department_id"/>
+        <property name="positionId" column="position_id"/>
+        <property name="mobile" column="mobile"/>
+        <property name="gender" column="gender"/>
+        <property name="tel" column="tel"/>
+        <property name="email" column="email"/>
+        <property name="weixinId" column="weixin_id"/>
+        <property name="enable" column="enable"/>
     </class>
 </hibernate-mapping>

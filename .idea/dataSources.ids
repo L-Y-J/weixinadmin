@@ -8,19 +8,23 @@
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="wx_admin"/>
     <table name="wx_organization" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="organization_name" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12"/>
-      <column name="organization_level" sqlType="VARCHAR" length="45" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="organization_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="organization_level" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="parent_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <index name="organization_leval_UNIQUE" unique="true" columns="organization_level"/>
     </table>
     <table name="wx_user" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="wx_id" sqlType="VARCHAR" length="45" precision="0" nullable="false" jdbcType="12"/>
-      <column name="wx_name" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12"/>
-      <column name="wx_level" sqlType="TINYINT" length="3" precision="0" nullable="true" jdbcType="-6" def="MA=="/>
-      <column name="wx_company" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12"/>
-      <column name="wx_phone" sqlType="VARCHAR" length="45" precision="0" nullable="true" jdbcType="12"/>
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="department_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="position_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="mobile" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="weixin_id" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="enable" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>

@@ -1,5 +1,7 @@
 package com.weixin.service;
 
+import com.weixin.bean.WxOrganization;
+
 import java.util.List;
 
 /**
@@ -9,4 +11,12 @@ import java.util.List;
 public interface OrganizationSerVice {
 
 	public List getOrganizations();
+
+	public WxOrganization getOrganization(Integer id);
+
+	public void addOrganization(WxOrganization wxOrganization);
+
+	public void delOrganization(WxOrganization wxOrganization);
+
+	public void updateOrganization(WxOrganization wxOrganization);
 }

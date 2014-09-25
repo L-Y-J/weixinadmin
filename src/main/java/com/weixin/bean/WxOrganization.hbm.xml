@@ -2,11 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.weixin.bean">
+<hibernate-mapping>
 
     <class name="com.weixin.bean.WxOrganization" table="wx_organization" schema="" catalog="wx_admin">
         <id name="id" column="id"/>
         <property name="organizationName" column="organization_name"/>
         <property name="organizationLevel" column="organization_level"/>
+        <property name="parentId" column="parent_id"/>
     </class>
 </hibernate-mapping>

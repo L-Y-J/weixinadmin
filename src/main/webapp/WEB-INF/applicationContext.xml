@@ -15,8 +15,9 @@
 			>
 
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="com.weixin.service" />
-	
+	<context:component-scan base-package="com.weixin.service.serviceimpl" />
+    <context:component-scan base-package="com.weixin.controller" />
+
     <!-- enable autowire -->
     <context:annotation-config />
 
@@ -67,6 +68,7 @@
     <aop:aspectj-autoproxy/>
     <!--<bean id="AddCheck" class="aop.spring.AddCheck" />-->
 
-    <bean id="OrganizationService" class="com.weixin.serviceimpl.OrganizationServiceImpl" />
+    <bean id="OrganizationService" class="com.weixin.service.serviceimpl.OrganizationServiceImpl" />
+    <bean id="UserService" class="com.weixin.service.serviceimpl.UserServiceImpl" />
 
 </beans>
