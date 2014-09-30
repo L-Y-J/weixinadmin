@@ -187,20 +187,20 @@
 <!-- block -->
 <div class="block">
 <div class="navbar navbar-inner block-header">
-    <div class="muted pull-left">Bootstrap dataTables with Toolbar</div>
+    <div class="muted pull-left">用户列表</div>
 </div>
 <div class="block-content collapse in">
 <div class="span12">
 <div class="table-toolbar">
     <div class="btn-group">
-        <a href="#"><button class="btn btn-success">Add New <i class="icon-plus icon-white"></i></button></a>
+        <a href="#myModal" data-toggle="modal"><button class="btn btn-success">操作 <i class="icon-edit icon-white"></i></button></a>
     </div>
     <div class="btn-group pull-right">
         <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="#">Print</a></li>
-            <li><a href="#">Save as PDF</a></li>
-            <li><a href="#">Export to Excel</a></li>
+            <li><a href="#">打印</a></li>
+            <li><a href="#">导出PDF</a></li>
+            <li><a href="#">导出Excel</a></li>
         </ul>
     </div>
 </div>
@@ -238,6 +238,100 @@
 
 </tbody>
 </table>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">添加/更新/删除人员</h3>
+    </div>
+    <div class="modal-body">
+        <ul class="nav nav-tabs" id="mytab">
+            <li><a href="#addtab" data-toggle="tab">添加</a></li>
+            <li><a href="#updatetab" data-toggle="tab" id="update">更改</a></li>
+            <li><a href="#deltab" data-toggle="tab">删除</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="addtab">
+                <div>
+                    <label>姓名</label>
+                    <input id="name" type="text" placeholder="请输入人员姓名...">
+                </div>
+                <div>
+                    <label>性别</label>
+                    <input id="gender" type="text" placeholder="男/女">
+                </div>
+                <div>
+                    <label>部门</label>
+                    <input id="department" type="text" placeholder="请输入部门名称...">
+                </div>
+                <div>
+                    <label>职位</label>
+                    <input id="position" type="text" placeholder="请输入职位名称...">
+                </div>
+                <div>
+                    <label>手机号码</label>
+                    <input id="mobile" type="text" placeholder="请输入手机号码...">
+                </div>
+                <div>
+                    <label>办公号码</label>
+                    <input id="tel" type="text" placeholder="请输入办公号码...">
+                </div>
+                <div>
+                    <label>邮箱</label>
+                    <input id="email" type="text" placeholder="请输入邮箱地址...">
+                </div>
+                <div>
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        禁用
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane active" id="updatetab">
+                <div>
+                    <label>姓名</label>
+                    <input id="name1" type="text" placeholder="请输入人员姓名...">
+                </div>
+                <div>
+                    <label>性别</label>
+                    <input id="gender1" type="text" placeholder="男/女">
+                </div>
+                <div>
+                    <label>部门</label>
+                    <input id="department1" type="text" placeholder="请输入部门名称...">
+                </div>
+                <div>
+                    <label>职位</label>
+                    <input id="position1" type="text" placeholder="请输入职位名称...">
+                </div>
+                <div>
+                    <label>手机号码</label>
+                    <input id="mobile1" type="tel" placeholder="请输入手机号码...">
+                </div>
+                <div>
+                    <label>办公号码</label>
+                    <input id="tel1" type="tel" placeholder="请输入办公号码...">
+                </div>
+                <div>
+                    <label>邮箱</label>
+                    <input id="email1" type="email" placeholder="请输入邮箱地址...">
+                </div>
+                <div>
+                    <label class="checkbox">
+                        <input type="checkbox" id="checkbox1" />
+                        禁用
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="deltab">点击确认则删除选中的人员</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-primary">确认</button>
+    </div>
+</div>
+
 </div>
 </div>
 </div>
@@ -247,7 +341,7 @@
 </div>
 <hr>
 <footer>
-    <p>&copy; Vincent Gabriel 2013</p>
+    <p>&copy; chenghang 2014</p>
 </footer>
 </div>
 <!--/.fluid-container-->
@@ -255,15 +349,10 @@
 <script src="<c:url value='/vendors/jquery-1.9.1.js'/>"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/vendors/datatables/js/jquery.dataTables.min.js'/>"></script>
-
+<script src="<c:url value='/dev/js/users.js'/>"></script>
 
 <script src="<c:url value='/assets/scripts.js'/>"></script>
 <script src="<c:url value='/assets/DT_bootstrap.js'/>"></script>
-<script>
-    $(function() {
-
-    });
-</script>
 </body>
 
 </html>

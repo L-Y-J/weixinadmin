@@ -21,7 +21,7 @@
     <!-- enable autowire -->
     <context:annotation-config />
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="com.weixin.component.XBasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/wx_admin?useUnicode=true&amp;characterEncoding=UTF8"/>
         <property name="username" value="root"/>
