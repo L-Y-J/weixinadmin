@@ -1,9 +1,11 @@
 package com.weixin.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by yongjie on 14-9-24.
  */
-public class WxUser {
+public class WxUser implements Serializable {
 	private int id;
 	private String name;
 	private Integer departmentId;
