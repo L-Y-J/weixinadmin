@@ -134,7 +134,7 @@
 <div class="span3" id="sidebar">
     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
         <li>
-            <a href="/home"><i class="icon-chevron-right"></i> Dashboard</a>
+            <a href="<%=request.getContextPath()%>/home"><i class="icon-chevron-right"></i> Dashboard</a>
         </li>
         <li>
             <a href="calendar.html"><i class="icon-chevron-right"></i> Calendar</a>
@@ -146,7 +146,7 @@
             <a href="form.html"><i class="icon-chevron-right"></i> Forms</a>
         </li>
         <li class="active">
-            <a href="/users"><i class="icon-chevron-right"></i> 用户</a>
+            <a href="<%=request.getContextPath()%>/user"><i class="icon-chevron-right"></i> 用户</a>
         </li>
         <li>
             <a href="buttons.html"><i class="icon-chevron-right"></i> Buttons & Icons</a>
@@ -155,7 +155,7 @@
             <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>
         </li>
         <li>
-            <a href="/organizations"><span class="badge badge-success pull-right">731</span> 组织</a>
+            <a href="<%=request.getContextPath()%>/organizations"><span class="badge badge-success pull-right">731</span> 组织</a>
         </li>
         <li>
             <a href="#"><span class="badge badge-success pull-right">812</span> Invoices</a>
@@ -246,9 +246,9 @@
     </div>
     <div class="modal-body">
         <ul class="nav nav-tabs" id="mytab">
-            <li><a href="#addtab" data-toggle="tab">添加</a></li>
+            <li><a href="#addtab" data-toggle="tab" id="add">添加</a></li>
             <li><a href="#updatetab" data-toggle="tab" id="update">更改</a></li>
-            <li><a href="#deltab" data-toggle="tab">删除</a></li>
+            <li><a href="#deltab" data-toggle="tab" id="delete">删除</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="addtab">
@@ -281,10 +281,8 @@
                     <input id="email" type="text" placeholder="请输入邮箱地址...">
                 </div>
                 <div>
-                    <label class="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        禁用
-                    </label>
+                    <label>禁用</label>
+                    <input id="use" type="number" placeholder="禁用为1，不禁用为0">
                 </div>
             </div>
             <div class="tab-pane active" id="updatetab">
@@ -317,10 +315,8 @@
                     <input id="email1" type="email" placeholder="请输入邮箱地址...">
                 </div>
                 <div>
-                    <label class="checkbox">
-                        <input type="checkbox" id="checkbox1" />
-                        禁用
-                    </label>
+                    <label>禁用</label>
+                    <input id="use1" type="number" placeholder="禁用为1，不禁用为0">
                 </div>
             </div>
             <div class="tab-pane" id="deltab">点击确认则删除选中的人员</div>
@@ -328,7 +324,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-        <button class="btn btn-primary">确认</button>
+        <button class="btn btn-primary" id="confirm">确认</button>
     </div>
 </div>
 
@@ -345,6 +341,8 @@
 </footer>
 </div>
 <!--/.fluid-container-->
+
+<basePath value = "<%=request.getContextPath()%>" id = "basePath"></basePath>
 
 <script src="<c:url value='/vendors/jquery-1.9.1.js'/>"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
