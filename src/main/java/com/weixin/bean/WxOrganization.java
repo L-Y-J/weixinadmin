@@ -1,13 +1,14 @@
 package com.weixin.bean;
 
 /**
- * Created by yongjie on 14-9-24.
+ * Created by yongjie on 14-10-10.
  */
 public class WxOrganization {
 	private int id;
 	private String organizationName;
 	private int organizationLevel;
 	private Integer parentId;
+	private String organizationIntroduction;
 
 	public int getId() {
 		return id;
@@ -41,6 +42,14 @@ public class WxOrganization {
 		this.parentId = parentId;
 	}
 
+	public String getOrganizationIntroduction() {
+		return organizationIntroduction;
+	}
+
+	public void setOrganizationIntroduction(String organizationIntroduction) {
+		this.organizationIntroduction = organizationIntroduction;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -50,6 +59,8 @@ public class WxOrganization {
 
 		if (id != that.id) return false;
 		if (organizationLevel != that.organizationLevel) return false;
+		if (organizationIntroduction != null ? !organizationIntroduction.equals(that.organizationIntroduction) : that.organizationIntroduction != null)
+			return false;
 		if (organizationName != null ? !organizationName.equals(that.organizationName) : that.organizationName != null)
 			return false;
 		if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
@@ -63,6 +74,7 @@ public class WxOrganization {
 		result = 31 * result + (organizationName != null ? organizationName.hashCode() : 0);
 		result = 31 * result + organizationLevel;
 		result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
+		result = 31 * result + (organizationIntroduction != null ? organizationIntroduction.hashCode() : 0);
 		return result;
 	}
 }

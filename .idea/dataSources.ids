@@ -7,11 +7,82 @@
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="wx_admin"/>
+    <table name="message_info" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="message_content" sqlType="VARCHAR" length="1000" precision="0" nullable="true" jdbcType="12"/>
+      <column name="message_type" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="receiver" sqlType="VARCHAR" length="1000" precision="0" nullable="true" jdbcType="12"/>
+      <column name="message_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="news_column" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="column_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="column_introduction" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="column_level" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="parentcolumn_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="column_name_UNIQUE" unique="true" columns="column_name"/>
+    </table>
+    <table name="news_commentate" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="commentator" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="commentate_content" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="commentate_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="news_info" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="news_title" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="news_abstract" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="news_column" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="news_content" sqlType="VARCHAR" length="5000" precision="0" nullable="true" jdbcType="12"/>
+      <column name="column" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="add_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="operator" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="news_read" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="reader" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="is_read" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="news_release" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="release_object" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="release_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="position_info" schema="" catalog="wx_admin" type="TABLE">
+      <column name="position_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="position_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="position_introduction" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="position_id"/>
+    </table>
+    <table name="rank_info" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="rank_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="rank_introduction" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="system_user" schema="" catalog="wx_admin" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="user_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="role_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="rights" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="wx_organization" schema="" catalog="wx_admin" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="organization_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="organization_level" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="parent_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="organization_introduction" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="wx_user" schema="" catalog="wx_admin" type="TABLE">
@@ -19,12 +90,19 @@
       <column name="name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="department_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="position_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="rank_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="mobile" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="gender" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="tel" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="weixin_id" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
       <column name="enable" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="account" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="person_numbers" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
+      <column name="dateofbirth" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="police_number" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
+      <column name="avatar" sqlType="VARCHAR" length="500" precision="0" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>

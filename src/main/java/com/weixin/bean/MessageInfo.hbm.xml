@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.weixin.bean.MessageInfo" table="message_info" schema="" catalog="wx_admin">
+        <id name="id" column="id"/>
+        <property name="messageContent" column="message_content"/>
+        <property name="messageType" column="message_type"/>
+        <property name="receiver" column="receiver"/>
+        <property name="messageTime" column="message_time"/>
+    </class>
+</hibernate-mapping>

@@ -211,12 +211,18 @@
     <th>ID</th>
     <th>姓名</th>
     <th>性别</th>
-    <th>部门ID</th>
-    <th>职位ID</th>
+    <th>部门</th>
+    <th>职位</th>
+    <th>微信ID</th>
+    <th>职级</th>
     <th>手机号码</th>
     <th>办公号码</th>
     <th>邮箱</th>
-    <th>微信ID</th>
+    <th>账号</th>
+    <th>人员序号</th>
+    <th>出生年月</th>
+    <th>警号</th>
+    <th>是否关注</th>
     <th>是否禁用</th>
 </tr>
 </thead>
@@ -226,13 +232,19 @@
         <td><c:out value="${user.id}" /></td>
         <td><c:out value="${user.name}" /></td>
         <td><c:out value="${user.gender}"/></td>
-        <td><c:out value="${user.departmentId}"/></td>
-        <td class="center"><c:out value="${user.positionId}"/></td>
+        <td><c:out value="${user.department}"/></td>
+        <td class="center"><c:out value="${user.position}"/></td>
+        <td class="center"><c:out value="${user.weixinId}"/></td>
+        <td class="center"><c:out value="${user.rank}"/></td>
         <td class="center"><c:out value="${user.mobile}"/></td>
         <td class="center"><c:out value="${user.tel}"/></td>
         <td class="center"><c:out value="${user.email}"/></td>
-        <td class="center"><c:out value="${user.weixinId}"/></td>
-        <td class="center"><c:out value="${user.enable}"/></td>
+        <td class="center"><c:out value="${user.account}"/></td>
+        <td class="center"><c:out value="${user.personNumbers}"/></td>
+        <td class="center"><c:out value="${user.dateofbirth}"/></td>
+        <td class="center"><c:out value="${user.policeNumber}"/></td>
+        <td class="center"><c:out value="${user.status}"/></td>
+        <td class="center"><c:out value="${user.use}"/></td>
     </tr>
     </c:forEach>
 

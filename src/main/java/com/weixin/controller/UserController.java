@@ -3,6 +3,7 @@ package com.weixin.controller;
 import com.weixin.bean.WxUser;
 import com.weixin.component.UserModel;
 import com.weixin.service.UserService;
+import com.weixin.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,13 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	UserUtils userUtils;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String ShowUsers(Map<String, Object> model){
-		List<WxUser> users = userService.getUsers();
+		List<WxUser> wxUser = userService.getUsers();
+		List<UserModel> users = userUtils.ConvertUserToModel(wxUser);
 		model.put("users", users);
 		return "users";
 	}
@@ -38,13 +42,15 @@ public class UserController {
 		}
 		WxUser wxUser = new WxUser();
 		wxUser.setName(userModel.getName());
-		wxUser.setDepartmentId(1);          //need to change
-		wxUser.setPositionId(1);            //need to change
+		//TODO 转化id为名称
+		wxUser.setDepartmentId(1);
+		wxUser.setPositionId(1);
 		wxUser.setMobile(userModel.getMobile());
 		wxUser.setGender(userModel.getGender().equals("男") ? 1 : 0);
 		wxUser.setTel(userModel.getTel());
 		wxUser.setEmail(userModel.getEmail());
-		wxUser.setWeixinId("xxxxxxxxxxx");  //need to change
+		//TODO 微信id
+		wxUser.setWeixinId("xxxxxxxxxxx");
 		wxUser.setEnable(userModel.getUse().equals("1") ? 1 : 0);
 		try {
 			userService.addUser(wxUser);
@@ -66,13 +72,15 @@ public class UserController {
 		try {
 			WxUser user = userService.getUser(Integer.parseInt(userModel.getId()));
 			user.setName(userModel.getName());
-			user.setDepartmentId(1);         //need to change
-			user.setPositionId(1);           //need to change
+			//TODO 转化id为名称
+			user.setDepartmentId(1);
+			user.setPositionId(1);
 			user.setMobile(userModel.getMobile());
 			user.setGender(userModel.getGender().equals("男") ? 1 : 0);
 			user.setTel(userModel.getTel());
 			user.setEmail(userModel.getEmail());
-			user.setWeixinId("xxxxxxxxxxx");  //need to change
+			//TODO 微信id
+			user.setWeixinId("xxxxxxxxxxx");
 			user.setEnable(userModel.getUse().equals("1") ? 1 : 0);
 			userService.updateUser(user);
 			map.put("status", "ok");

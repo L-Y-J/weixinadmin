@@ -9,11 +9,18 @@
         <property name="name" column="name"/>
         <property name="departmentId" column="department_id"/>
         <property name="positionId" column="position_id"/>
+        <property name="rankId" column="rank_id"/>
         <property name="mobile" column="mobile"/>
         <property name="gender" column="gender"/>
         <property name="tel" column="tel"/>
         <property name="email" column="email"/>
         <property name="weixinId" column="weixin_id"/>
         <property name="enable" column="enable"/>
+        <property name="account" column="account"/>
+        <property name="personNumbers" column="person_numbers"/>
+        <property name="dateofbirth" column="dateofbirth"/>
+        <property name="policeNumber" column="police_number"/>
+        <property name="avatar" column="avatar"/>
+        <property name="status" column="status"/>
     </class>
 </hibernate-mapping>

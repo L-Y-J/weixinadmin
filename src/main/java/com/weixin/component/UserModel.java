@@ -12,10 +12,18 @@ public class UserModel implements Serializable {
 	private String gender;
 	private String department;
 	private String position;
+	private String weixinId;
+	private String rank;
 	private String mobile;
 	private String tel;
 	private String email;
 	private String use;
+	private String account;
+	private String personNumbers;
+	private String dateofbirth;
+	private String policeNumber;
+	private String avatar;
+	private String status;
 
 	public String getId() {
 		return id;
@@ -89,18 +97,67 @@ public class UserModel implements Serializable {
 		this.use = use;
 	}
 
-	@Override
-	public String toString() {
-		return "UserModel{" +
-				"id='" + id + '\'' +
-				", name='" + name + '\'' +
-				", gender='" + gender + '\'' +
-				", department='" + department + '\'' +
-				", position='" + position + '\'' +
-				", mobile='" + mobile + '\'' +
-				", tel='" + tel + '\'' +
-				", email='" + email + '\'' +
-				", use='" + use + '\'' +
-				'}';
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getPersonNumbers() {
+		return personNumbers;
+	}
+
+	public void setPersonNumbers(String personNumbers) {
+		this.personNumbers = personNumbers;
+	}
+
+	public String getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(String dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getPoliceNumber() {
+		return policeNumber;
+	}
+
+	public void setPoliceNumber(String policeNumber) {
+		this.policeNumber = policeNumber;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getWeixinId() {
+		return weixinId;
+	}
+
+	public void setWeixinId(String weixinId) {
+		this.weixinId = weixinId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

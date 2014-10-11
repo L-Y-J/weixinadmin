@@ -5,6 +5,7 @@ import com.weixin.service.OrganizationSerVice;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 @Transactional
+@Service
 public class OrganizationServiceImpl implements OrganizationSerVice {
 
 	@Resource
