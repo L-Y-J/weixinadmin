@@ -60,61 +60,13 @@ jQuery.extend({
 });
 
 var data = {
-    $row_selected:null,
-    add:true,
-    update:false,
-    delete:false,
-    CallBack : function(result){
-        if (result.status=='ok')
-            alert('操作成功');
-        else
-            alert('操作失败');
-    }
+    $row_selected:null
 };
 
-$(function(){
-
-    $(".gradeA").on('click', function(){
-        $(this).addClass('info');
-        if (data.$row_selected!=null){
-            data.$row_selected.removeClass('info');
-        }
-        data.$row_selected = $(this);
-    });
-
-    $("#add").on('click', function(){
-        data.add = true;
-        data.update = false;
-        data.delete = false;
-    });
-
-    $("#update").on('click', function(){
-        data.update = true;
-        data.add = false;
-        data.delete = false;
-        if (data.$row_selected!=null){
-            var $children = data.$row_selected.children();
-            $('#name1').val($children[1].innerHTML);
-            $('#gender1').val($children[2].innerHTML);
-            $('#department1').val($children[3].innerHTML);
-            $('#position1').val($children[4].innerHTML);
-            $('#mobile1').val($children[5].innerHTML);
-            $('#tel1').val($children[6].innerHTML);
-            $('#email1').val($children[7].innerHTML);
-            $('#use1').val($children[9].innerHTML);
-        }
-    });
-
-    $("#delete").on('click', function(){
-        data.add = false;
-        data.update = false;
-        data.delete = true;
-    });
-
-    $("#confirm").on('click', function(){
+var tools = {
+    Add : function() {
         var basePath=$('#basePath').attr("value");
-        if (data.add == true){
-            var user = {
+        var user = {
                 name : $("#name").val(),
                 gender : $("#gender").val(),
                 department : $("#department").val(),
@@ -131,53 +83,50 @@ $(function(){
                 contentType : 'application/json; charset=UTF-8',
                 data : json_data,
                 dataType : 'json',
-                success : data.CallBack
+                success : tools.CallBack
             });
-        }
+    },
 
-        if (data.update==true){
-            if (data.$row_selected==null){
-                alert('请点击选择需要更改的行');
-                return;
-            }
-            var $children = data.$row_selected.children();
-            var user = {
-                id : $children[0].innerHTML,
-                name : $("#name1").val(),
-                gender : $("#gender1").val(),
-                department : $("#department1").val(),
-                position : $("#position1").val(),
-                mobile : $("#mobile1").val(),
-                tel : $("#tel1").val(),
-                email : $("#email1").val(),
-                use : $("#use1").val()
-            };
-            var json_data = $.toJSON(user);
+    Update : function(user){
+        var json_data = $.toJSON(user);
             $.ajax({
                 url : basePath+'/user',
                 type : 'POST',
                 contentType : 'application/json; charset=UTF-8',
                 data : json_data,
                 dataType : 'json',
-                success : data.CallBack
+                success : tools.CallBack
             });
-        }
-        if (data.delete==true){
-            if (data.$row_selected==null){
-                alert('请点击选择需要删除的行');
-                return;
-            }
-            var $children = data.$row_selected.children();
-            var id = $children[0].innerHTML;
-            $.ajax({
-                url : basePath+'/user/'+id,
-                type : 'DELETE',
-                dataType : 'json',
-                success : data.CallBack
-            });
-        }
+    },
 
+    CallBack : function(result){
+        if (result.status=='ok')
+            alert('操作成功');
+        else
+            alert('操作失败');
+    }
+};
 
+$(function(){
+    $(".gradeA").on('click', function(){
+        $(this).addClass('info');
+        if (data.$row_selected!=null){
+            data.$row_selected.removeClass('info');
+        }
+        data.$row_selected = $(this);
     });
 
+    $('#test').on('click', function(){
+        $("#detail").css(
+        {
+            position: "absolute",
+            width : 400,
+            height : $('#example').height(),
+            top: $('#example').offset().top,
+            left: 600,
+            zIndex: 9999,
+            backgroundColor: "#F8F8F8"
+        }).hide();
+        $('#detail').toggle();
+    });
 });

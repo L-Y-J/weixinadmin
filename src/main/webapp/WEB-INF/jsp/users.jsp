@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
     <link href="<c:url value='/bootstrap/css/bootstrap-responsive.min.css'/>" rel="stylesheet" media="screen">
     <link href="<c:url value='/assets/styles.css'/>" rel="stylesheet" media="screen">
     <link href="<c:url value='/assets/DT_bootstrap.css'/>" rel="stylesheet" media="screen">
+
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<c:url value='/vendors/flot/excanvas.min.js'/>"></script><![endif]-->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -149,7 +151,7 @@
             <a href="<%=request.getContextPath()%>/user"><i class="icon-chevron-right"></i> 用户</a>
         </li>
         <li>
-            <a href="buttons.html"><i class="icon-chevron-right"></i> Buttons & Icons</a>
+            <a href="<%=request.getContextPath()%>/user/add"><i class="icon-chevron-right"></i> 新增用户</a>
         </li>
         <li>
             <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>
@@ -193,19 +195,19 @@
 <div class="span12">
 <div class="table-toolbar">
     <div class="btn-group">
-        <a href="#myModal" data-toggle="modal"><button class="btn btn-success">操作 <i class="icon-edit icon-white"></i></button></a>
+        <a href="#myModal" data-toggle="modal"><button class="btn btn-success">新增<i class="icon-edit icon-white"></i></button></a>
     </div>
     <div class="btn-group pull-right">
         <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="#">打印</a></li>
+            <li><a href="#" id="test">打印</a></li>
             <li><a href="#">导出PDF</a></li>
             <li><a href="#">导出Excel</a></li>
         </ul>
     </div>
 </div>
 
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
 <thead>
 <tr>
     <th>ID</th>
@@ -213,17 +215,20 @@
     <th>性别</th>
     <th>部门</th>
     <th>职位</th>
-    <th>微信ID</th>
+    <th style="display: none">微信ID</th>
+    <th style="display: none">头像地址</th>
     <th>职级</th>
     <th>手机号码</th>
-    <th>办公号码</th>
-    <th>邮箱</th>
+    <th style="display: none">办公号码</th>
+    <th style="display: none">邮箱</th>
     <th>账号</th>
     <th>人员序号</th>
-    <th>出生年月</th>
+    <th style="display: none">出生年月</th>
     <th>警号</th>
-    <th>是否关注</th>
+    <th style="display: none">是否关注</th>
     <th>是否禁用</th>
+    <td>详细</td>
+    <th>删除</th>
 </tr>
 </thead>
 <tbody>
@@ -234,17 +239,20 @@
         <td><c:out value="${user.gender}"/></td>
         <td><c:out value="${user.department}"/></td>
         <td class="center"><c:out value="${user.position}"/></td>
-        <td class="center"><c:out value="${user.weixinId}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.weixinId}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.avatar}"/></td>
         <td class="center"><c:out value="${user.rank}"/></td>
         <td class="center"><c:out value="${user.mobile}"/></td>
-        <td class="center"><c:out value="${user.tel}"/></td>
-        <td class="center"><c:out value="${user.email}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.tel}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.email}"/></td>
         <td class="center"><c:out value="${user.account}"/></td>
         <td class="center"><c:out value="${user.personNumbers}"/></td>
-        <td class="center"><c:out value="${user.dateofbirth}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.dateofbirth}"/></td>
         <td class="center"><c:out value="${user.policeNumber}"/></td>
-        <td class="center"><c:out value="${user.status}"/></td>
+        <td class="center" style="display: none"><c:out value="${user.status}"/></td>
         <td class="center"><c:out value="${user.use}"/></td>
+        <td><a href="#myModal" data-toggle="modal"><button class="btn btn-mini">详细...</button></a></td>
+        <td><a href="#myModal" data-toggle="modal"><button class="btn btn-warning btn-mini">删除</button></a></td>
     </tr>
     </c:forEach>
 
@@ -254,91 +262,91 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">添加/更新/删除人员</h3>
+        <h3 id="myModalLabel">新增</h3>
     </div>
     <div class="modal-body">
-        <ul class="nav nav-tabs" id="mytab">
-            <li><a href="#addtab" data-toggle="tab" id="add">添加</a></li>
-            <li><a href="#updatetab" data-toggle="tab" id="update">更改</a></li>
-            <li><a href="#deltab" data-toggle="tab" id="delete">删除</a></li>
-        </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="addtab">
-                <div>
-                    <label>姓名</label>
-                    <input id="name" type="text" placeholder="请输入人员姓名...">
-                </div>
-                <div>
-                    <label>性别</label>
-                    <input id="gender" type="text" placeholder="男/女">
-                </div>
-                <div>
-                    <label>部门</label>
-                    <input id="department" type="text" placeholder="请输入部门名称...">
-                </div>
-                <div>
-                    <label>职位</label>
-                    <input id="position" type="text" placeholder="请输入职位名称...">
-                </div>
-                <div>
-                    <label>手机号码</label>
-                    <input id="mobile" type="text" placeholder="请输入手机号码...">
-                </div>
-                <div>
-                    <label>办公号码</label>
-                    <input id="tel" type="text" placeholder="请输入办公号码...">
-                </div>
-                <div>
-                    <label>邮箱</label>
-                    <input id="email" type="text" placeholder="请输入邮箱地址...">
-                </div>
-                <div>
-                    <label>禁用</label>
-                    <input id="use" type="number" placeholder="禁用为1，不禁用为0">
-                </div>
+            <div>
+                <label>姓名</label>
+                <input id="name" type="text" placeholder="请输入人员姓名">
             </div>
-            <div class="tab-pane active" id="updatetab">
-                <div>
-                    <label>姓名</label>
-                    <input id="name1" type="text" placeholder="请输入人员姓名...">
-                </div>
-                <div>
-                    <label>性别</label>
-                    <input id="gender1" type="text" placeholder="男/女">
-                </div>
-                <div>
-                    <label>部门</label>
-                    <input id="department1" type="text" placeholder="请输入部门名称...">
-                </div>
-                <div>
-                    <label>职位</label>
-                    <input id="position1" type="text" placeholder="请输入职位名称...">
-                </div>
-                <div>
-                    <label>手机号码</label>
-                    <input id="mobile1" type="tel" placeholder="请输入手机号码...">
-                </div>
-                <div>
-                    <label>办公号码</label>
-                    <input id="tel1" type="tel" placeholder="请输入办公号码...">
-                </div>
-                <div>
-                    <label>邮箱</label>
-                    <input id="email1" type="email" placeholder="请输入邮箱地址...">
-                </div>
-                <div>
-                    <label>禁用</label>
-                    <input id="use1" type="number" placeholder="禁用为1，不禁用为0">
-                </div>
+            <div>
+                <label>性别</label>
+                <select>
+                    <option>男</option>
+                    <option>女</option>
+                </select>
             </div>
-            <div class="tab-pane" id="deltab">点击确认则删除选中的人员</div>
+            <div>
+                <label>部门</label>
+            </div>
+            <div>
+                <label>职位</label>
+                <select>
+                </select>
+            </div>
+            <div>
+                <label>微信ID</label>
+                <input id="weixin" type="text" placeholder="请输入微信ID">
+            </div>
+            <div>
+                <label>头像地址</label>
+                <input id="avatar" type="text" placeholder="请输入头像地址">
+            </div>
+            <div>
+                <label>职级</label>
+                <input id="rank" type="text" placeholder="请输入职级名称">
+            </div>
+            <div>
+                <label>手机号码</label>
+                <input id="mobile" type="text" placeholder="请输入手机号码">
+            </div>
+            <div>
+                <label>办公号码</label>
+                <input id="tel" type="text" placeholder="请输入办公号码">
+            </div>
+            <div>
+                <label>邮箱</label>
+                <span class="add-on"><i class="icon-envelope"></i></span>
+                <input id="email" type="text" placeholder="请输入邮箱地址">
+            </div>
+            <div>
+                <label>账号</label>
+                <input id="account" type="text" placeholder="请输入账号名">
+            </div>
+            <div>
+                <label>人员序号</label>
+                <input id="personNumbers" type="text" placeholder="请输入人员序号">
+            </div>
+            <div>
+                <label>出生年月</label>
+                <input id="dateofbirth" type="text" placeholder="请输入">
+            </div>
+            <div>
+                <label>警号</label>
+                <input id="policeNumber" type="text" placeholder="请输入职位名称...">
+            </div>
+            <div>
+                <label>是否关注</label>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>4</option>
+                </select>
+            </div>
+            <div>
+                <label>禁用</label>
+                <input id="use" type="number" placeholder="禁用为1，不禁用为0">
+            </div>
         </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-        <button class="btn btn-primary" id="confirm">确认</button>
+        <button class="btn btn-primary" id="confirm_add">确认</button>
     </div>
 </div>
+
+<div id="detail" style="display: none">test</div>
 
 </div>
 </div>
@@ -364,5 +372,4 @@
 <script src="<c:url value='/assets/scripts.js'/>"></script>
 <script src="<c:url value='/assets/DT_bootstrap.js'/>"></script>
 </body>
-
 </html>

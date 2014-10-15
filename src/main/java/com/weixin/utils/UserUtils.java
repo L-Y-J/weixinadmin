@@ -2,8 +2,10 @@ package com.weixin.utils;
 
 import com.weixin.bean.PositionInfo;
 import com.weixin.bean.RankInfo;
+import com.weixin.bean.WxOrganization;
 import com.weixin.bean.WxUser;
 import com.weixin.component.UserModel;
+import com.weixin.service.OrganizationSerVice;
 import com.weixin.service.PositionInfoService;
 import com.weixin.service.RankInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,17 @@ public class UserUtils {
 	PositionInfoService positionInfoService;
 	@Autowired
 	RankInfoService rankInfoService;
-//	@Autowired
+	@Autowired
+	OrganizationSerVice organizationSerVice;
+
 	List<PositionInfo> positionInfos;
 	List<RankInfo> ranks;
+	List<WxOrganization> organizations;
 
 	public List<UserModel> ConvertUserToModel(List<WxUser> wxUsers){
 		positionInfos = positionInfoService.getPositions();
 		ranks = rankInfoService.getRanks();
+		organizations = organizationSerVice.getOrganizations();
 
 		List<UserModel> models = new ArrayList<UserModel>();
 		for (WxUser o : wxUsers) {
@@ -47,8 +53,7 @@ public class UserUtils {
 			model.setStatus(o.getStatus()==1?"已关注":o.getStatus()==2?"已冻结":"未关注");
 			model.setPosition(FindPositionNameById(o.getPositionId()));
 			model.setRank(FindRankNameById(o.getRankId()));
-			//TODO 部门id转为部门名称
-			model.setDepartment(o.getDepartmentId().toString());
+			model.setDepartment(FindOrganizationNameById(o.getDepartmentId()));
 			models.add(model);
 		}
 		return models;
@@ -70,6 +75,17 @@ public class UserUtils {
 		for (RankInfo r : ranks){
 			if (r.getId()==id){
 				name = r.getRankName();
+				break;
+			}
+		}
+		return name;
+	}
+
+	private String FindOrganizationNameById(Integer id){
+		String name = "";
+		for (WxOrganization o : organizations){
+			if (o.getId()==id){
+				name = o.getOrganizationName();
 				break;
 			}
 		}

@@ -39,10 +39,17 @@ var FormValidation = function () {
                         creditcard: true
                     },
                     occupation: {
-                        minlength: 5,
+                        minlength: 5
                     },
                     category: {
                         required: true
+                    },
+                    mobile: {
+                        required:true,
+                        digits:true
+                    },
+                    tel: {
+                        digits:true
                     }
                 },
 
@@ -73,6 +80,22 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
+                    var data = {};
+                    data.name = $("input[name='name']").val();
+                    data.gender = $('#gender').val();
+                    data.weixinId = $("input[name='weixinId']").val();
+                    data.mobile = $("input[name='mobile']").val();
+                    data.tel = $("input[name='tel']").val();
+                    data.email = $("input[name='email']").val();
+                    data.account = $("input[name='account']").val();
+                    data.personNumbers = $("input[name='personNumbers']").val();
+                    data.policeNumber = $("input[name='policeNumber']").val();
+                    data.dateofbirth = $("input[name='dateofbirth']").val();
+                    data.position = $('#position').val();
+                    data.rank = $('#rank').val();
+                    data.use = $('#optionsCheckbox').is(':checked')==true ? "1":"0";
+                    data.department = $('#citySel').val();
+                    var json_data = $.toJSON(data);
                 }
             });
     }

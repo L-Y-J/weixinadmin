@@ -1,13 +1,18 @@
 package com.weixin.controller;
 
+import com.weixin.bean.PositionInfo;
+import com.weixin.bean.RankInfo;
 import com.weixin.bean.WxUser;
 import com.weixin.component.UserModel;
+import com.weixin.service.PositionInfoService;
+import com.weixin.service.RankInfoService;
 import com.weixin.service.UserService;
 import com.weixin.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +28,10 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	@Autowired
+	PositionInfoService positionInfoService;
+	@Autowired
+	RankInfoService rankInfoService;
+	@Autowired
 	UserUtils userUtils;
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -31,6 +40,35 @@ public class UserController {
 		List<UserModel> users = userUtils.ConvertUserToModel(wxUser);
 		model.put("users", users);
 		return "users";
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String ShowAddUsers(Map<String, Object> model){
+		final List<PositionInfo> positions = positionInfoService.getPositions();
+		final List<RankInfo> ranks = rankInfoService.getRanks();
+		Map map = new HashMap(){{put("positions",positions); put("ranks", ranks);}};
+		model.put("data", map);
+		return "users_add";
+	}
+
+	@RequestMapping(value = "/asyncdata")
+	public @ResponseBody List AsyncData(){
+		List list = new ArrayList();
+		for (int i=1; i<6; i++){
+			Map map = new HashMap();
+			map.put("id",i);
+			map.put("pId",i-1);
+			map.put("open",true);
+			map.put("nocheck",true);
+			map.put("name","test"+i);
+			list.add(map);
+		}
+		Map map = new HashMap();
+		map.put("id",6);
+		map.put("pId",5);
+		map.put("name","test");
+		list.add(map);
+		return list;
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, headers="Accept=application/json,application/xml")
