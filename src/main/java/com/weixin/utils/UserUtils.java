@@ -49,8 +49,8 @@ public class UserUtils {
 			model.setPersonNumbers(o.getPersonNumbers());
 			model.setDateofbirth(DateUtils.ConvertTimeStampToString(o.getDateofbirth()));
 			model.setPoliceNumber(o.getPoliceNumber());
-			model.setAvatar(o.getAvatar());
-			model.setStatus(o.getStatus()==1?"已关注":o.getStatus()==2?"已冻结":"未关注");
+			model.setAvatar(o.getAvatar()==null?"":o.getAvatar());
+			model.setStatus(o.getStatus()==null?"":o.getStatus()==1?"已关注":o.getStatus()==2?"已冻结":"未关注");
 			model.setPosition(FindPositionNameById(o.getPositionId()));
 			model.setRank(FindRankNameById(o.getRankId()));
 			model.setDepartment(FindOrganizationNameById(o.getDepartmentId()));

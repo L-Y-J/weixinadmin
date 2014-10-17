@@ -236,7 +236,7 @@
     </div>
 </div>
 
-<script src="<c:url value='/vendors/jquery-1.9.1.js' />"></script>
+<script src="<c:url value='/vendors/jquery-1.9.1.min.js' />"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js' />"></script>
 <script type="text/javascript" src="<c:url value='/vendors/tree/my.js' />"></script>
 

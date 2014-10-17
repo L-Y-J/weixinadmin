@@ -2,131 +2,126 @@
  * Created by yongjie on 14-9-30.
  */
 
-jQuery.extend({
-    toJSON : function(object)
-    {
-        var type = typeof object;
-        if ('object'==type)
-        {
-        if (Array==object.constructor)
-            type = 'array';
-        else if (RegExp==object.constructor)
-            type = 'regexp';
-        else
-            type = 'object';
-    }
-        switch(type)
-        {
-        case 'undefined':
-        case 'unknown':
-            return;break;
-        case 'function':
-        case 'boolean':
-        case 'regexp':
-            return object.toString();break;
-        case 'number':
-            return isFinite(object) ? object.toString():'null';break;
-        case 'string':
-            return '"'+object.replace(/(\\|\")/g,"\\$1")
-                .replace(/\n|\r|\t/g, function(){
-                    var a = arguments[0];
-                    return (a=='\n') ? '\\n':
-                        (a=='\r') ? '\\r':
-                            (a=='\t') ? '\\t':""
-                })+'"';
-            break;
-        case 'object':
-            if (object==null) return 'null';
-            var results = [];
-            for (var property in object)
-            {
-                var value = jQuery.toJSON(object[property]);
-                if (value !== undefined)
-                    results.push(jQuery.toJSON(property)+':'+value);
-            }
-            return '{' + results.join(',') + '}';
-            break;
-        case 'array':
-            var results = [];
-            for (var i=0; i<object.length; i++)
-            {
-                var value = jQuery.toJSON(object[i]);
-                if (value !== undefined) results.push(value);
-            }
-            return '[' + results.join(',') + ']';
-            break;
-    }
-    }
-});
-
-var data = {
-    $row_selected:null
-};
-
 var tools = {
-    Add : function() {
-        var basePath=$('#basePath').attr("value");
-        var user = {
-                name : $("#name").val(),
-                gender : $("#gender").val(),
-                department : $("#department").val(),
-                position : $("#position").val(),
-                mobile : $("#mobile").val(),
-                tel : $("#tel").val(),
-                email : $("#email").val(),
-                use : $("#use").val()
-            };
-            var json_data = $.toJSON(user);
-            $.ajax({
-                url : basePath+'/user',
-                type : 'PUT',
-                contentType : 'application/json; charset=UTF-8',
-                data : json_data,
-                dataType : 'json',
-                success : tools.CallBack
+    ShowFormData : function($button){
+        var $td_list = $button.parent().parent().children();
+        var $input_name = $("input[name='name']");
+        var $select_gender = $('#gender');
+        var $input_weixinId = $("input[name='weixinId']");
+        var $input_mobile = $("input[name='mobile']");
+        var $input_tel = $("input[name='tel']");
+        var $input_email = $("input[name='email']");
+        var $input_account = $("input[name='account']");
+        var $input_personNumbers = $("input[name='personNumbers']");
+        var $input_policeNumber = $("input[name='policeNumber']");
+        var $input_dateofbirth = $("input[name='dateofbirth']");
+        var $select_position = $('#position');
+        var $select_rank = $('#rank');
+        var $checkbox_use = $("input[type='checkbox']");
+        var $input_department = $('#citySel');
+        $("input[name='id']").val($td_list[0].innerHTML);
+        $input_name.val($td_list[1].innerHTML);
+        $input_weixinId.val($td_list[5].innerHTML);
+        $input_mobile.val($td_list[8].innerHTML);
+        $input_tel.val($td_list[9].innerHTML);
+        $input_email.val($td_list[10].innerHTML);
+        $input_account.val($td_list[11].innerHTML);
+        $input_personNumbers.val($td_list[12].innerHTML);
+        $input_policeNumber.val($td_list[14].innerHTML);
+        $input_dateofbirth.val($td_list[13].innerHTML);
+        $input_department.val($td_list[3].innerHTML);
+        var td_gender = $td_list[2].innerHTML;
+        var td_position = $td_list[4].innerHTML;
+        var td_rank = $td_list[7].innerHTML;
+        var td_use = $td_list[16].innerHTML;
+        $select_gender.children().each(function(index, td){
+            if (td_gender==td.innerHTML){
+                $select_gender.get(0).selectedIndex = index;
+                return false;
+            }
+        });
+        $select_position.children().each(function(index, td){
+            if (td_position==td.innerHTML){
+                $select_position.get(0).selectedIndex = index;
+                return false;
+            }
+        });
+        $select_rank.children().each(function(index, td){
+            if (td_rank==td.innerHTML){
+                $select_rank.get(0).selectedIndex = index;
+                return false;
+            }
+        });
+        if (td_use=='禁用'){
+            $checkbox_use.prop({
+                checked:true
             });
-    },
-
-    Update : function(user){
-        var json_data = $.toJSON(user);
-            $.ajax({
-                url : basePath+'/user',
-                type : 'POST',
-                contentType : 'application/json; charset=UTF-8',
-                data : json_data,
-                dataType : 'json',
-                success : tools.CallBack
+        } else{
+            $checkbox_use.prop({
+                checked:false
             });
-    },
-
-    CallBack : function(result){
-        if (result.status=='ok')
-            alert('操作成功');
-        else
-            alert('操作失败');
+        }
     }
 };
 
-$(function(){
-    $(".gradeA").on('click', function(){
-        $(this).addClass('info');
-        if (data.$row_selected!=null){
-            data.$row_selected.removeClass('info');
-        }
-        data.$row_selected = $(this);
-    });
+function ShowDetail(obj){
+    tools.ShowFormData($(obj));
+    $("input[name='name']").attr('disabled','disabled');
+    $("input[name='gender']").attr('disabled','disabled');
+    $("input[name='weixinId']").attr('disabled','disabled');
+    $("input[name='mobile']").attr('disabled','disabled');
+    $("input[name='tel']").attr('disabled','disabled');
+    $("input[name='email']").attr('disabled','disabled');
+    $("input[name='account']").attr('disabled','disabled');
+    $("input[name='personNumbers']").attr('disabled','disabled');
+    $("input[name='policeNumber']").attr('disabled','disabled');
+    $("input[name='dateofbirth']").attr('disabled','disabled');
+    $("input[type='checkbox']").attr('disabled','disabled');
+    $('#citySel').attr('disabled', 'disabled');
+    $('#gender').attr('disabled', 'disabled');
+    $('#position').attr('disabled', 'disabled');
+    $('#rank').attr('disabled', 'disabled');
 
-    $('#test').on('click', function(){
-        $("#detail").css(
-        {
-            position: "absolute",
-            width : 400,
-            height : $('#example').height(),
-            top: $('#example').offset().top,
-            left: 600,
-            zIndex: 9999,
-            backgroundColor: "#F8F8F8"
-        }).hide();
-        $('#detail').toggle();
+    $('div .form-actions').hide();
+    $('#myModal').modal('show');
+}
+
+function ShowUpdate(obj){
+    tools.ShowFormData($(obj));
+    $("input[name='name']").removeAttr('disabled');
+    $("input[name='gender']").removeAttr('disabled');
+    $("input[name='weixinId']").removeAttr('disabled');
+    $("input[name='mobile']").removeAttr('disabled');
+    $("input[name='tel']").removeAttr('disabled');
+    $("input[name='email']").removeAttr('disabled');
+    $("input[name='account']").removeAttr('disabled');
+    $("input[name='personNumbers']").removeAttr('disabled');
+    $("input[name='policeNumber']").removeAttr('disabled');
+    $("input[name='dateofbirth']").removeAttr('disabled');
+    $("input[type='checkbox']").removeAttr('disabled');
+    $('#citySel').removeAttr('disabled');
+    $('#gender').removeAttr('disabled');
+    $('#position').removeAttr('disabled');
+    $('#rank').removeAttr('disabled');
+
+    $('div .form-actions').show();
+    $('#myModal').modal('show');
+}
+
+function Delete(obj){
+    $('#myModal_1').modal('show');
+}
+
+function DeleteAction(obj){
+    var $td_list = $(obj).parent().parent().children();
+    var id = $td_list[0].innerHTML;
+    var basePath = $('basePath').attr('value');
+    $.ajax({
+        url:basePath+'/user/'+id,
+        type:'DELETE',
+        dataType:'json',
+        success:function(result){
+            alert(result.status);
+        }
     });
-});
+}

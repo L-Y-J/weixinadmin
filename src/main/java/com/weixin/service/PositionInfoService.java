@@ -18,4 +18,8 @@ public interface PositionInfoService {
 	public void updatePositions(PositionInfo positionInfo);
 
 	public void delPositions(PositionInfo positionInfo);
+
+	public Integer getIdByName(String name);
+
+	public String getNameById(Integer id);
 }

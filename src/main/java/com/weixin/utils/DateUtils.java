@@ -21,9 +21,11 @@ public class DateUtils {
 	}
 
 	public static Timestamp ConvertStringToTimeStamp(String dateString){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		format.setLenient(false);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		try {
-			timestamp = Timestamp.valueOf(dateString);
+			timestamp = new Timestamp(format.parse(dateString).getTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

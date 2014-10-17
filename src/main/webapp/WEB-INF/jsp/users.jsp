@@ -8,7 +8,7 @@
     <title>用户</title>
     <!-- Bootstrap -->
     <link href="<c:url value='/bootstrap/css/bootstrap.min.css'/>" rel="stylesheet" media="screen">
-    <link href="<c:url value='/bootstrap/css/bootstrap-responsive.min.css'/>" rel="stylesheet" media="screen">
+    <%--<link href="<c:url value='/bootstrap/css/bootstrap-responsive.min.css'/>" rel="stylesheet" media="screen">--%>
     <link href="<c:url value='/assets/styles.css'/>" rel="stylesheet" media="screen">
     <link href="<c:url value='/assets/DT_bootstrap.css'/>" rel="stylesheet" media="screen">
 
@@ -195,12 +195,12 @@
 <div class="span12">
 <div class="table-toolbar">
     <div class="btn-group">
-        <a href="#myModal" data-toggle="modal"><button class="btn btn-success">新增<i class="icon-edit icon-white"></i></button></a>
+        <a href="#myModal" data-toggle="modal"><button class="btn btn-info">新增<i class="icon-edit icon-white"></i></button></a>
     </div>
     <div class="btn-group pull-right">
         <button data-toggle="dropdown" class="btn dropdown-toggle">Tools <span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="#" id="test">打印</a></li>
+            <li><a href="#">打印</a></li>
             <li><a href="#">导出PDF</a></li>
             <li><a href="#">导出Excel</a></li>
         </ul>
@@ -227,7 +227,8 @@
     <th>警号</th>
     <th style="display: none">是否关注</th>
     <th>是否禁用</th>
-    <td>详细</td>
+    <th>详细</th>
+    <th>更改</th>
     <th>删除</th>
 </tr>
 </thead>
@@ -251,8 +252,9 @@
         <td class="center"><c:out value="${user.policeNumber}"/></td>
         <td class="center" style="display: none"><c:out value="${user.status}"/></td>
         <td class="center"><c:out value="${user.use}"/></td>
-        <td><a href="#myModal" data-toggle="modal"><button class="btn btn-mini">详细...</button></a></td>
-        <td><a href="#myModal" data-toggle="modal"><button class="btn btn-warning btn-mini">删除</button></a></td>
+        <td><button class="btn btn-mini" onclick="ShowDetail(this)">详细...</button></td>
+        <td><button class="btn btn-success btn-mini" onclick="ShowUpdate(this)">更改</button></td>
+        <td><button class="btn btn-warning btn-mini" onclick="Delete(this)">删除</button></td>
     </tr>
     </c:forEach>
 
@@ -262,91 +264,154 @@
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">新增</h3>
+        <h3 id="myModalLabel">详细信息</h3>
     </div>
     <div class="modal-body">
-        <div class="tab-content">
-            <div>
-                <label>姓名</label>
-                <input id="name" type="text" placeholder="请输入人员姓名">
+        <form id="form_sample_1" class="form-horizontal">
+          <fieldset>
+            <div class="alert alert-error hide">
+                <button class="close" data-dismiss="alert"></button>
+                验证不通过，请检查您的输入是否正确
             </div>
-            <div>
-                <label>性别</label>
-                <select>
-                    <option>男</option>
-                    <option>女</option>
-                </select>
+            <div class="alert alert-success hide">
+                <button class="close" data-dismiss="alert"></button>
+                验证通过
             </div>
-            <div>
-                <label>部门</label>
+            <div class="control-group">
+              <label class="control-label">ID</label>
+              <div class="controls">
+                  <input type="text" name="id" class="span6" disabled />
+              </div>
             </div>
-            <div>
-                <label>职位</label>
-                <select>
-                </select>
+            <div class="control-group">
+              <label class="control-label">姓名<span class="required">*</span></label>
+              <div class="controls">
+                  <input type="text" name="name" data-required="1" class="span6" />
+              </div>
             </div>
-            <div>
-                <label>微信ID</label>
-                <input id="weixin" type="text" placeholder="请输入微信ID">
+            <div class="control-group">
+                <label class="control-label">性别<span class="required">*</span></label>
+                <div class="controls">
+                    <select id="gender" class="span6" name="category">
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>头像地址</label>
-                <input id="avatar" type="text" placeholder="请输入头像地址">
+            <div class="control-group">
+              <label class="control-label">微信ID<span class="required">*</span></label>
+              <div class="controls">
+                  <input type="text" name="weixinId" data-required="1" class="span6"/>
+              </div>
             </div>
-            <div>
-                <label>职级</label>
-                <input id="rank" type="text" placeholder="请输入职级名称">
+            <div class="control-group">
+                <label class="control-label">手机号码<span class="required">*</span></label>
+                <div class="controls">
+                    <input name="mobile" type="text" data-required="1" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>手机号码</label>
-                <input id="mobile" type="text" placeholder="请输入手机号码">
+            <div class="control-group">
+                <label class="control-label">办公号码</label>
+                <div class="controls">
+                    <input name="tel" type="text" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>办公号码</label>
-                <input id="tel" type="text" placeholder="请输入办公号码">
+            <div class="control-group">
+                <label class="control-label">邮箱<span class="required">*</span></label>
+                <div class="controls">
+                    <input name="email" type="text" data-required="1" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>邮箱</label>
-                <span class="add-on"><i class="icon-envelope"></i></span>
-                <input id="email" type="text" placeholder="请输入邮箱地址">
+            <div class="control-group">
+                <label class="control-label">账号</label>
+                <div class="controls">
+                    <input name="account" type="text" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>账号</label>
-                <input id="account" type="text" placeholder="请输入账号名">
+            <div class="control-group">
+                <label class="control-label">人员序号</label>
+                <div class="controls">
+                    <input name="personNumbers" type="text" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>人员序号</label>
-                <input id="personNumbers" type="text" placeholder="请输入人员序号">
+            <div class="control-group">
+                <label class="control-label">警号</label>
+                <div class="controls">
+                    <input name="policeNumber" type="text" class="span6"/>
+                </div>
             </div>
-            <div>
-                <label>出生年月</label>
-                <input id="dateofbirth" type="text" placeholder="请输入">
+            <div class="control-group">
+              <label class="control-label">出生年月</label>
+              <div class="controls">
+                <input type="text" name="dateofbirth" class="input-xlarge span6" value="2014-01-01">
+              </div>
             </div>
-            <div>
-                <label>警号</label>
-                <input id="policeNumber" type="text" placeholder="请输入职位名称...">
+            <div class="control-group">
+                <label class="control-label">职位</label>
+                <div class="controls">
+                    <select class="span6" id="position">
+                        <option>选择...</option>
+                        <c:forEach var="position" items="${data.positions}">
+                            <option><c:out value="${position.positionName}" /></option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>是否关注</label>
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>4</option>
-                </select>
+            <div class="control-group">
+                <label class="control-label">职级</label>
+                <div class="controls">
+                    <select class="span6" id="rank">
+                        <option>选择...</option>
+                        <c:forEach var="rank" items="${data.ranks}">
+                            <option><c:out value="${rank.rankName}" /></option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label>禁用</label>
-                <input id="use" type="number" placeholder="禁用为1，不禁用为0">
+            <div class="control-group">
+              <label class="control-label">禁用</label>
+              <div class="controls">
+                <label class="uniform">
+                  <input type="checkbox">
+                </label>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-        <button class="btn btn-primary" id="confirm_add">确认</button>
+            <div class="control-group">
+               <label class="control-label">部门</label>
+                <div class="controls">
+                    <div class="content_wrap">
+                    <div class="zTreeDemoBackground">
+                        <ul class="list">
+                            <input id="citySel" type="text" readonly value="" style="width:120px;" onclick="showMenu();" />
+                        </ul>
+                    </div>
+                    </div>
+                    <div id="menuContent" class="menuContent" style="display:none;">
+                    <ul id="treeDemo" class="ztree" style="margin-top:0; width:180px; height: 300px;"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="reset" class="btn">清空</button>
+            </div>
+          </fieldset>
+        </form>
     </div>
 </div>
 
-<div id="detail" style="display: none">test</div>
+
+<div id="myModal_1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_1" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel_1">详细信息</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</div>
 
 </div>
 </div>
@@ -364,12 +429,106 @@
 
 <basePath value = "<%=request.getContextPath()%>" id = "basePath"></basePath>
 
-<script src="<c:url value='/vendors/jquery-1.9.1.js'/>"></script>
+<link href="<c:url value='/vendors/zTree/demo.css' />" rel="stylesheet">
+<link href="<c:url value='/vendors/zTree/zTreeStyle.css' />" rel="stylesheet">
+
+<script src="<c:url value='/vendors/jquery-1.9.1.min.js'/>"></script>
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/vendors/datatables/js/jquery.dataTables.min.js'/>"></script>
-<script src="<c:url value='/dev/js/users.js'/>"></script>
-
-<script src="<c:url value='/assets/scripts.js'/>"></script>
 <script src="<c:url value='/assets/DT_bootstrap.js'/>"></script>
-</body>
+<script src="<c:url value='/assets/scripts.js'/>"></script>
+
+<script src="<c:url value='/vendors/zTree/jquery.ztree.core-3.5.min.js' />"></script>
+<script src="<c:url value='/vendors/zTree/jquery.ztree.excheck-3.5.min.js' />"></script>
+
+<script src="<c:url value='/dev/js/users.js'/>"></script>
+<script src="<c:url value='/dev/js/json.js'/>"></script></body>
+
+<script type="text/javascript" src="<c:url value="/vendors/jquery-validation/dist/jquery.validate.min.js" />"></script>
+<script src="<c:url value="/assets/form-validation-update.js" />"></script>
+<script src="<c:url value="/vendors/jquery-validation/localization/messages_zh.js" />"></script>
+<script>
+    jQuery(document).ready(function() {
+	   FormValidation.init();
+	});
+</script>
+
+<SCRIPT type="text/javascript">
+		<!--
+        var setting = {
+            check: {
+				enable: true,
+				chkboxType: {"Y":"", "N":""}
+			},
+            view: {
+				dblClickExpand: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				beforeClick: beforeClick,
+				onCheck: onCheck
+			},
+			async: {
+				enable: true,
+				url:"/user/asyncdata",
+				autoParam:["id", "name=n", "level=lv"],
+				otherParam:{"otherParam":"zTreeAsyncTest"},
+				dataFilter: filter
+			}
+		};
+
+        function filter(treeId, parentNode, childNodes) {
+			if (!childNodes) return null;
+			for (var i=0, l=childNodes.length; i<l; i++) {
+//				childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+                childNodes[i].name = childNodes[i].name;
+			}
+			return childNodes;
+		}
+
+		function beforeClick(treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.checkNode(treeNode, !treeNode.checked, null, true);
+			return false;
+		}
+
+		function onCheck(e, treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = zTree.getCheckedNodes(true),
+			v = "";
+			for (var i=0, l=nodes.length; i<l; i++) {
+				v += nodes[i].name + ",";
+			}
+			if (v.length > 0 ) v = v.substring(0, v.length-1);
+			var cityObj = $("#citySel");
+			cityObj.attr("value", v);
+		}
+
+		function showMenu() {
+			var cityObj = $("#citySel");
+			var cityOffset = $("#citySel").offset();
+			$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+
+			$("body").bind("mousedown", onBodyDown);
+		}
+		function hideMenu() {
+			$("#menuContent").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDown);
+		}
+		function onBodyDown(event) {
+			if (!(event.target.id == "menuBtn" || event.target.id == "citySel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+				hideMenu();
+			}
+		}
+
+		$(document).ready(function(){
+            $.fn.zTree.init($("#treeDemo"), setting);
+		});
+		//-->
+</SCRIPT>
+
 </html>

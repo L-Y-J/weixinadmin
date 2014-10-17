@@ -2,11 +2,14 @@ package com.weixin.controller;
 
 import com.weixin.bean.PositionInfo;
 import com.weixin.bean.RankInfo;
+import com.weixin.bean.WxOrganization;
 import com.weixin.bean.WxUser;
 import com.weixin.component.UserModel;
+import com.weixin.service.OrganizationSerVice;
 import com.weixin.service.PositionInfoService;
 import com.weixin.service.RankInfoService;
 import com.weixin.service.UserService;
+import com.weixin.utils.DateUtils;
 import com.weixin.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +35,8 @@ public class UserController {
 	@Autowired
 	RankInfoService rankInfoService;
 	@Autowired
+	OrganizationSerVice organizationSerVice;
+	@Autowired
 	UserUtils userUtils;
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -39,6 +44,12 @@ public class UserController {
 		List<WxUser> wxUser = userService.getUsers();
 		List<UserModel> users = userUtils.ConvertUserToModel(wxUser);
 		model.put("users", users);
+
+		final List<PositionInfo> positions = positionInfoService.getPositions();
+		final List<RankInfo> ranks = rankInfoService.getRanks();
+		Map map = new HashMap(){{put("positions",positions); put("ranks", ranks);}};
+		model.put("data", map);
+
 		return "users";
 	}
 
@@ -54,20 +65,14 @@ public class UserController {
 	@RequestMapping(value = "/asyncdata")
 	public @ResponseBody List AsyncData(){
 		List list = new ArrayList();
-		for (int i=1; i<6; i++){
+		List<WxOrganization> organizations = organizationSerVice.getOrganizations();
+		for (WxOrganization o : organizations){
 			Map map = new HashMap();
-			map.put("id",i);
-			map.put("pId",i-1);
-			map.put("open",true);
-			map.put("nocheck",true);
-			map.put("name","test"+i);
+			map.put("id", o.getId());
+			map.put("pId", o.getParentId());
+			map.put("name", o.getOrganizationName());
 			list.add(map);
 		}
-		Map map = new HashMap();
-		map.put("id",6);
-		map.put("pId",5);
-		map.put("name","test");
-		list.add(map);
 		return list;
 	}
 
@@ -80,16 +85,19 @@ public class UserController {
 		}
 		WxUser wxUser = new WxUser();
 		wxUser.setName(userModel.getName());
-		//TODO 转化id为名称
-		wxUser.setDepartmentId(1);
-		wxUser.setPositionId(1);
+		wxUser.setDepartmentId(organizationSerVice.getIdByName(userModel.getDepartment()));
+		wxUser.setPositionId(positionInfoService.getIdByName(userModel.getPosition()));
+		wxUser.setRankId(rankInfoService.getIdByName(userModel.getRank()));
 		wxUser.setMobile(userModel.getMobile());
 		wxUser.setGender(userModel.getGender().equals("男") ? 1 : 0);
 		wxUser.setTel(userModel.getTel());
 		wxUser.setEmail(userModel.getEmail());
-		//TODO 微信id
-		wxUser.setWeixinId("xxxxxxxxxxx");
+		wxUser.setWeixinId(userModel.getWeixinId());
 		wxUser.setEnable(userModel.getUse().equals("1") ? 1 : 0);
+		wxUser.setAccount(userModel.getAccount());
+		wxUser.setPersonNumbers(userModel.getPersonNumbers());
+		wxUser.setDateofbirth(DateUtils.ConvertStringToTimeStamp(userModel.getDateofbirth()));
+		wxUser.setPoliceNumber(userModel.getPoliceNumber());
 		try {
 			userService.addUser(wxUser);
 			map.put("status", "ok");
@@ -110,16 +118,19 @@ public class UserController {
 		try {
 			WxUser user = userService.getUser(Integer.parseInt(userModel.getId()));
 			user.setName(userModel.getName());
-			//TODO 转化id为名称
-			user.setDepartmentId(1);
-			user.setPositionId(1);
+			user.setDepartmentId(organizationSerVice.getIdByName(userModel.getDepartment()));
+			user.setPositionId(positionInfoService.getIdByName(userModel.getPosition()));
+			user.setRankId(rankInfoService.getIdByName(userModel.getRank()));
 			user.setMobile(userModel.getMobile());
 			user.setGender(userModel.getGender().equals("男") ? 1 : 0);
 			user.setTel(userModel.getTel());
 			user.setEmail(userModel.getEmail());
-			//TODO 微信id
-			user.setWeixinId("xxxxxxxxxxx");
+			user.setWeixinId(userModel.getWeixinId());
 			user.setEnable(userModel.getUse().equals("1") ? 1 : 0);
+			user.setAccount(userModel.getAccount());
+			user.setPersonNumbers(userModel.getPersonNumbers());
+			user.setDateofbirth(DateUtils.ConvertStringToTimeStamp(userModel.getDateofbirth()));
+			user.setPoliceNumber(userModel.getPoliceNumber());
 			userService.updateUser(user);
 			map.put("status", "ok");
 		} catch (Exception e) {

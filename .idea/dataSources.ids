@@ -15,48 +15,6 @@
       <column name="message_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="news_column" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="column_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="column_introduction" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="column_level" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="parentcolumn_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="column_name_UNIQUE" unique="true" columns="column_name"/>
-    </table>
-    <table name="news_commentate" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="commentator" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="commentate_content" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="commentate_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="news_info" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="news_title" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="news_abstract" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="news_column" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="news_content" sqlType="VARCHAR" length="5000" precision="0" nullable="true" jdbcType="12"/>
-      <column name="column" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="add_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="operator" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="news_read" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="reader" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="is_read" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
-    <table name="news_release" schema="" catalog="wx_admin" type="TABLE">
-      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="news_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="release_object" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>
-      <column name="release_time" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
     <table name="position_info" schema="" catalog="wx_admin" type="TABLE">
       <column name="position_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="position_name" sqlType="VARCHAR" length="50" precision="0" nullable="true" jdbcType="12"/>

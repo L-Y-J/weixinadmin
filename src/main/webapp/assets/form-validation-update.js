@@ -81,6 +81,7 @@ var FormValidation = function () {
                     success1.show();
                     error1.hide();
                     var data = {};
+                    data.id = $("input[name='id']").val();
                     data.name = $("input[name='name']").val();
                     data.gender = $('#gender').val();
                     data.weixinId = $("input[name='weixinId']").val();
@@ -99,7 +100,7 @@ var FormValidation = function () {
                     var basePath = $('#basePath').attr("value");
                     $.ajax({
                         url : basePath+'/user',
-                        type : 'PUT',
+                        type : 'POST',
                         data : json_data,
                         contentType : 'application/json; charset=UTF-8',
                         dataType : 'json',

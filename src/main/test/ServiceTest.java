@@ -97,4 +97,10 @@ public class ServiceTest {
 		WxUser user = userService.getUser(1);
 		userService.delUser(user);
 	}
+
+	@Test
+	public void findNameTest(){
+		Integer id = organizationSerVice.getIdByName("test8");
+		System.out.println(id!=null?id:"id==null");
+	}
 }

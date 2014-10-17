@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 <head>
     <title>新增用户</title>
     <!-- Bootstrap -->
@@ -261,7 +260,7 @@
                 <div class="control-group">
                   <label class="control-label">出生年月</label>
                   <div class="controls">
-                    <input type="text" name="dateofbirth" class="input-xlarge datepicker span6" value="01/01/2014">
+                    <input type="text" name="dateofbirth" class="input-xlarge datepicker span6" value="2014-01-01">
                   </div>
                 </div>
                 <div class="control-group">
@@ -325,13 +324,15 @@
 </div>
 <hr>
 <footer>
-    <p>&copy; Vincent Gabriel 2013</p>
+    <p>&copy; chenghang 2014</p>
 </footer>
 </div>
 
+<basePath value = "<%=request.getContextPath()%>" id = "basePath"></basePath>
+
 <link href="<c:url value="/vendors/datepicker.css" />" rel="stylesheet" media="screen">
 <link href="<c:url value="/vendors/uniform.default.css" />" rel="stylesheet" media="screen">
-<link href="<c:url value="/vendors/chosen.min.css" />" rel="stylesheet" media="screen">
+<%--<link href="<c:url value="/vendors/chosen.min.css" />" rel="stylesheet" media="screen">--%>
 
 <link href="<c:url value='/vendors/zTree/demo.css' />" rel="stylesheet">
 <link href="<c:url value='/vendors/zTree/zTreeStyle.css' />" rel="stylesheet">
@@ -341,11 +342,11 @@
 <script src="<c:url value='/bootstrap/js/bootstrap.min.js' />"></script>
 <script src="<c:url value='/assets/scripts.js' />"></script>
 <script src="<c:url value="/vendors/jquery.uniform.min.js" />"></script>
-<script src="<c:url value="/vendors/chosen.jquery.min.js" />"></script>
+<%--<script src="<c:url value="/vendors/chosen.jquery.min.js" />"></script>--%>
 <script src="<c:url value="/vendors/bootstrap-datepicker.js" />"></script>
 <script type="text/javascript" src="<c:url value="/vendors/jquery-validation/dist/jquery.validate.min.js" />"></script>
 <script src="<c:url value="/assets/form-validation.js" />"></script>
-<script src="<c:url value="/assets/messages_cn.js" />"></script>
+<script src="<c:url value="/vendors/jquery-validation/localization/messages_zh.js" />"></script>
 
 <script src="<c:url value='/vendors/zTree/jquery.ztree.core-3.5.min.js' />"></script>
 <script src="<c:url value='/vendors/zTree/jquery.ztree.excheck-3.5.min.js' />"></script>
@@ -356,7 +357,7 @@
 	   FormValidation.init();
 	});
     $(function(){
-        $(".datepicker").datepicker();
+        $(".datepicker").datepicker({format: 'yyyy-mm-dd'});
         $(".uniform_on").uniform();
     });
 </script>
@@ -437,7 +438,7 @@
             $.fn.zTree.init($("#treeDemo"), setting);
 		});
 		//-->
-	</SCRIPT>
+</SCRIPT>
 
 </body>
 </html>

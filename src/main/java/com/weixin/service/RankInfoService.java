@@ -18,4 +18,9 @@ public interface RankInfoService {
 	public void updateRank(RankInfo rankInfo);
 
 	public void delRank(RankInfo rankInfo);
+
+	public Integer getIdByName(String name);
+
+	public String getNameById(Integer id);
+
 }

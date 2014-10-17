@@ -19,4 +19,8 @@ public interface OrganizationSerVice {
 	public void delOrganization(WxOrganization wxOrganization);
 
 	public void updateOrganization(WxOrganization wxOrganization);
+
+	public Integer getIdByName(String name);
+
+	public String getNameById(Integer id);
 }
