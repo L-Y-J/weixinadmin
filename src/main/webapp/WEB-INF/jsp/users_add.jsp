@@ -299,7 +299,7 @@
                         <div class="content_wrap">
 	                    <div class="zTreeDemoBackground">
 		                    <ul class="list">
-			                    <input id="citySel" type="text" readonly value="" style="width:120px;" onclick="showMenu();" />
+			                    <input id="citySel" name="department" type="text" readonly value="" style="width:120px;" onclick="showMenu();" />
 		                    </ul>
 	                    </div>
                         </div>
@@ -356,6 +356,13 @@
     jQuery(document).ready(function() {
 	   FormValidation.init();
 	});
+    jQuery.validator.addMethod("isOneChoice", function(value, element, param){
+        var list = value.split(',');
+        if (list.length > 1)
+            return false;
+        return true;
+    }, jQuery.format("只能选择一个部门"));
+
     $(function(){
         $(".datepicker").datepicker({format: 'yyyy-mm-dd'});
         $(".uniform_on").uniform();

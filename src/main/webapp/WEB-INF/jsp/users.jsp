@@ -382,7 +382,7 @@
                     <div class="content_wrap">
                     <div class="zTreeDemoBackground">
                         <ul class="list">
-                            <input id="citySel" type="text" readonly value="" style="width:120px;" onclick="showMenu();" />
+                            <input id="citySel" name="department" type="text" readonly value="" style="width:120px;" onclick="showMenu();" />
                         </ul>
                     </div>
                     </div>
@@ -408,7 +408,7 @@
     </div>
     <div class="modal-body">
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="submit" class="btn btn-primary" onclick="DeleteAction()">确认删除</button>
         </div>
     </div>
 </div>
@@ -442,7 +442,7 @@
 <script src="<c:url value='/vendors/zTree/jquery.ztree.excheck-3.5.min.js' />"></script>
 
 <script src="<c:url value='/dev/js/users.js'/>"></script>
-<script src="<c:url value='/dev/js/json.js'/>"></script></body>
+<script src="<c:url value='/dev/js/json.js'/>"></script>
 
 <script type="text/javascript" src="<c:url value="/vendors/jquery-validation/dist/jquery.validate.min.js" />"></script>
 <script src="<c:url value="/assets/form-validation-update.js" />"></script>
@@ -451,6 +451,12 @@
     jQuery(document).ready(function() {
 	   FormValidation.init();
 	});
+    jQuery.validator.addMethod("isOneChoice", function(value, element, param){
+        var list = value.split(',');
+        if (list.length > 1)
+            return false;
+        return true;
+    }, jQuery.format("只能选择一个部门"));
 </script>
 
 <SCRIPT type="text/javascript">
@@ -505,7 +511,8 @@
 			}
 			if (v.length > 0 ) v = v.substring(0, v.length-1);
 			var cityObj = $("#citySel");
-			cityObj.attr("value", v);
+			//cityObj.attr("value", v);
+            cityObj.val(v);
 		}
 
 		function showMenu() {
@@ -531,4 +538,5 @@
 		//-->
 </SCRIPT>
 
+</body>
 </html>

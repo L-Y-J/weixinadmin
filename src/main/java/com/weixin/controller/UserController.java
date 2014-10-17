@@ -70,7 +70,7 @@ public class UserController {
 			Map map = new HashMap();
 			map.put("id", o.getId());
 			map.put("pId", o.getParentId());
-			map.put("name", o.getOrganizationName());
+			map.put("name", o.getId()+" "+o.getOrganizationName());
 			list.add(map);
 		}
 		return list;
@@ -85,7 +85,7 @@ public class UserController {
 		}
 		WxUser wxUser = new WxUser();
 		wxUser.setName(userModel.getName());
-		wxUser.setDepartmentId(organizationSerVice.getIdByName(userModel.getDepartment()));
+		wxUser.setDepartmentId(Integer.parseInt(userModel.getDepartmentId()));
 		wxUser.setPositionId(positionInfoService.getIdByName(userModel.getPosition()));
 		wxUser.setRankId(rankInfoService.getIdByName(userModel.getRank()));
 		wxUser.setMobile(userModel.getMobile());
@@ -118,7 +118,7 @@ public class UserController {
 		try {
 			WxUser user = userService.getUser(Integer.parseInt(userModel.getId()));
 			user.setName(userModel.getName());
-			user.setDepartmentId(organizationSerVice.getIdByName(userModel.getDepartment()));
+			user.setDepartmentId(Integer.parseInt(userModel.getDepartmentId()));
 			user.setPositionId(positionInfoService.getIdByName(userModel.getPosition()));
 			user.setRankId(rankInfoService.getIdByName(userModel.getRank()));
 			user.setMobile(userModel.getMobile());

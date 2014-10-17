@@ -11,6 +11,7 @@ public class UserModel implements Serializable {
 	private String name;
 	private String gender;
 	private String department;
+	private String departmentId;
 	private String position;
 	private String weixinId;
 	private String rank;
@@ -159,5 +160,13 @@ public class UserModel implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
 	}
 }

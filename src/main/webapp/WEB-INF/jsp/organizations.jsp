@@ -151,7 +151,7 @@
                     <a href="<%=request.getContextPath()%>/user"><i class="icon-chevron-right"></i> 用户</a>
                 </li>
                 <li>
-                    <a href="buttons.html"><i class="icon-chevron-right"></i> Buttons & Icons</a>
+                    <a href="<%=request.getContextPath()%>/user/add"><i class="icon-chevron-right"></i> 新增用户</a>
                 </li>
                 <li>
                     <a href="interface.html"><i class="icon-chevron-right"></i> UI & Interface</a>

@@ -3,6 +3,9 @@
  */
 
 var tools = {
+
+    btn_del : null,
+
     ShowFormData : function($button){
         var $td_list = $button.parent().parent().children();
         var $input_name = $("input[name='name']");
@@ -109,10 +112,15 @@ function ShowUpdate(obj){
 }
 
 function Delete(obj){
+    tools.btn_del = obj;
     $('#myModal_1').modal('show');
 }
 
-function DeleteAction(obj){
+function DeleteAction(){
+    $('#myModal_1').modal('hide');
+    var obj = tools.btn_del;
+    if (obj==null)
+        return;
     var $td_list = $(obj).parent().parent().children();
     var id = $td_list[0].innerHTML;
     var basePath = $('basePath').attr('value');

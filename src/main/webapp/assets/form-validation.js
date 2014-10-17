@@ -50,7 +50,8 @@ var FormValidation = function () {
                     },
                     tel: {
                         digits:true
-                    }
+                    },
+                    department:"isOneChoice"
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              
@@ -94,7 +95,7 @@ var FormValidation = function () {
                     data.position = $('#position').val();
                     data.rank = $('#rank').val();
                     data.use = $('#optionsCheckbox').is(':checked')==true ? "1":"0";
-                    data.department = $('#citySel').val();
+                    data.departmentId = $('#citySel').val().split(' ')[0];
                     var json_data = $.toJSON(data);
                     var basePath = $('#basePath').attr("value");
                     $.ajax({
